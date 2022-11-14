@@ -5,6 +5,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import com.example.tartantransporttracker.ui.login.LoginFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
@@ -13,7 +15,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewPager = findViewById(R.id.view_pager);
-        viewPager.
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.view_pager, LoginFragment.class, null)
+                    .commit();
+        }
     }
 }
