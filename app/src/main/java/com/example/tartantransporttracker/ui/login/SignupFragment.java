@@ -8,11 +8,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tartantransporttracker.R;
 
-public class LoginFragment extends Fragment {
-
+public class SignupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
 
-        return  (ViewGroup) inflater.inflate(R.layout.login_fragment, container, false);
+        return (ViewGroup) inflater.inflate(R.layout.signup_fragment, container, false);
     }
 }
