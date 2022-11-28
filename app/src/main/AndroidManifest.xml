@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TartanTransportTracker"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.tartantransporttracker.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.tartantransporttracker.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

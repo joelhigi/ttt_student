@@ -1,4 +1,4 @@
-package com.example.tartantransporttracker.ui.login;
+package com.tartantransporttracker.ui.login;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

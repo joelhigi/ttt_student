@@ -1,4 +1,4 @@
-package com.example.tartantransporttracker;
+package com.tartantransporttracker;
 
 import android.content.Context;
 

@@ -1,9 +1,10 @@
-package com.example.tartantransporttracker;
+package com.tartantransporttracker;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.tartantransporttracker.R;
 import com.google.android.material.tabs.TabLayout;
 
 public class LoginActivity extends AppCompatActivity {
