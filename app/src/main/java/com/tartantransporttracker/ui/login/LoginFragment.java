@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
-import com.example.tartantransporttracker.R;
+import com.tartantransporttracker.R;
+
 
 public class LoginFragment extends Fragment {
 
