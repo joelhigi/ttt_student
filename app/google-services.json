@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "465469493888",
+    "project_id": "tartantransport-c62d3",
+    "storage_bucket": "tartantransport-c62d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465469493888:android:5d643fe614012610d70c65",
+        "android_client_info": {
+          "package_name": "com.tartantransporttracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465469493888-2qpholp9iejtrrtn00vs6rcoosm4mnt8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tartantransporttracker",
+            "certificate_hash": "994932b2c74a19e53710d18c4522ad1badcab1e0"
+          }
+        },
+        {
+          "client_id": "465469493888-3jlin3jr8ccq9p3e4n9vk02geh41q1cd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDciBlMZKm8Q9XJnP0-PqIjsCNB6Uekw8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465469493888-3jlin3jr8ccq9p3e4n9vk02geh41q1cd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.example.tartantransporttracker.data.model;
+package com.tartantransporttracker.data.model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

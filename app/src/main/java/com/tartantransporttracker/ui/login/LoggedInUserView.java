@@ -1,4 +1,4 @@
-package com.example.tartantransporttracker.ui.login;
+package com.tartantransporttracker.ui.login;
 
 /**
  * Class exposing authenticated user details to the UI.

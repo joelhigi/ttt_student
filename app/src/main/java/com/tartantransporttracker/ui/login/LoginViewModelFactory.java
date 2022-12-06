@@ -1,11 +1,11 @@
-package com.example.tartantransporttracker.ui.login;
+package com.tartantransporttracker.ui.login;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 
-import com.example.tartantransporttracker.data.LoginDataSource;
-import com.example.tartantransporttracker.data.LoginRepository;
+import com.tartantransporttracker.data.LoginDataSource;
+import com.tartantransporttracker.data.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

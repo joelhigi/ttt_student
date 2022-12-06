@@ -6,9 +6,14 @@
     android:id="@+id/drawLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
+    android:id="@+id/main_layout"
+    tools:context="com.tartantransporttracker.MainActivity">
+=======
     tools:context=".MainActivity"
     tools:openDrawer="start"
     android:fitsSystemWindows="true">
+>>>>>>> fab743315cd37526a9d2dec6d676753a860b07a1
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

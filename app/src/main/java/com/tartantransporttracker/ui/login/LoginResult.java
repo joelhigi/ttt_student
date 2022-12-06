@@ -1,4 +1,4 @@
-package com.example.tartantransporttracker.ui.login;
+package com.tartantransporttracker.ui.login;
 
 import androidx.annotation.Nullable;
 

@@ -1,6 +1,6 @@
-package com.example.tartantransporttracker.data;
+package com.tartantransporttracker.data;
 
-import com.example.tartantransporttracker.data.model.LoggedInUser;
+import com.tartantransporttracker.data.model.LoggedInUser;
 
 import java.io.IOException;
 

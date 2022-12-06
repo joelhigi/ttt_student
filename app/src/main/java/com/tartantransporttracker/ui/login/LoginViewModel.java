@@ -1,4 +1,4 @@
-package com.example.tartantransporttracker.ui.login;
+package com.tartantransporttracker.ui.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
-import com.example.tartantransporttracker.data.LoginRepository;
-import com.example.tartantransporttracker.data.Result;
-import com.example.tartantransporttracker.data.model.LoggedInUser;
-import com.example.tartantransporttracker.R;
+import com.tartantransporttracker.R;
+import com.tartantransporttracker.data.LoginRepository;
+import com.tartantransporttracker.data.Result;
+import com.tartantransporttracker.data.model.LoggedInUser;
 
 public class LoginViewModel extends ViewModel {
 

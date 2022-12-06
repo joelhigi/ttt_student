@@ -1,6 +1,6 @@
-package com.example.tartantransporttracker.data;
+package com.tartantransporttracker.data;
 
-import com.example.tartantransporttracker.data.model.LoggedInUser;
+import com.tartantransporttracker.data.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

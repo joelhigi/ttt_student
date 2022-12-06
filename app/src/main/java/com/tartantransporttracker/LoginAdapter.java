@@ -1,4 +1,4 @@
-package com.example.tartantransporttracker;
+package com.tartantransporttracker;
 
 import android.content.Context;
 
@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.tartantransporttracker.ui.login.LoginFragment;
-import com.example.tartantransporttracker.ui.login.SignupFragment;
+import com.tartantransporttracker.ui.login.LoginFragment;
+import com.tartantransporttracker.ui.login.SignupFragment;
 
 public class LoginAdapter extends FragmentPagerAdapter {
   private Context context;
@@ -35,5 +35,6 @@ public class LoginAdapter extends FragmentPagerAdapter {
               return null;
       }
   }
+
 
 }
