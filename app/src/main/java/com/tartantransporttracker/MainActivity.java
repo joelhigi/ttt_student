@@ -10,6 +10,7 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.tartantransporttracker.databinding.ActivityMainBinding;
+import com.tartantransporttracker.managers.UserManager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
     private static final int RC_SIGN_IN = 123;
+    private UserManager userManager = UserManager.getInstance();
     @Override
     ActivityMainBinding getViewBinding() {
         return ActivityMainBinding.inflate(getLayoutInflater());
@@ -29,9 +31,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     }
     private void setupListeners(){
         binding.goToLogin.setOnClickListener(view -> {
-//            Intent intent1 = new Intent(MainActivity.this, LoginActivity.class);
-//            startActivity(intent1);
-            startSignInActivity();
+            if(userManager.isCurrentUserLogged()){
+                startMapActivity();
+            } else{
+                startSignInActivity();
+            }
         });
     }
 
@@ -71,6 +75,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         if(requestCode == RC_SIGN_IN){
             //success
             if(resultCode == RESULT_OK){
+                userManager.createUser();
                 showSnackBar(getString(R.string.connection_succeed));
             } else {
                 //ERRORS
@@ -85,5 +90,21 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                 }
             }
         }
+    }
+
+    @Override
+    protected  void onResume() {
+        super.onResume();
+        updateLoginButton();
+    }
+
+    private void startMapActivity(){
+        Intent intent = new Intent(this,MapActivity.class);
+        startActivity(intent);
+    }
+
+    private void updateLoginButton(){
+        binding.goToLogin.setText(userManager.isCurrentUserLogged() ? getString(R.string.button_login_text_logged) :
+                getString(R.string.button_login_text_not_logged));
     }
 }
