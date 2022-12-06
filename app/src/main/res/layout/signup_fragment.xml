@@ -62,11 +62,14 @@
         android:textColor="@color/white"
         android:background="@drawable/button_bg"
         android:textStyle="bold"
+        android:id="@+id/signupBtn"
+        android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.575"
         app:layout_constraintWidth_percent=".8"
+
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
