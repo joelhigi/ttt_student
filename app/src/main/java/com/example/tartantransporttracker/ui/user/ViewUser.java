@@ -1,41 +1,20 @@
-package com.example.tartantransporttracker.ui.route;
+package com.example.tartantransporttracker.ui.user;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.tartantransporttracker.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class AdminViewRoute extends AppCompatActivity implements View.OnClickListener {
-
-    private AppBarConfiguration appBarConfiguration;
-
-    Button deleteBtn;
+public class ViewUser extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_route);
-        deleteBtn = findViewById(R.id.deleteBtn);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.SecondFragment);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+        setContentView(R.layout.activity_view_user);
     }
 
     @Override
@@ -57,5 +36,4 @@ public class AdminViewRoute extends AppCompatActivity implements View.OnClickLis
         });
         alert.show();
     }
-
 }
