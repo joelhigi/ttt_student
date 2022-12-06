@@ -2,6 +2,7 @@ package com.example.tartantransporttracker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -13,7 +14,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.tartantransporttracker.ui.route.AdminViewRoute;
+import com.example.tartantransporttracker.ui.user.ViewUser;
+
+public class MainActivity extends AppCompatActivity {
+
 import com.google.android.material.navigation.NavigationView;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
