@@ -15,8 +15,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.tartantransporttracker.R;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class AdminViewRoute extends AppCompatActivity implements View.OnClickListener {
 
