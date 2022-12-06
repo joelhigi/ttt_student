@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.route.Admin_view_route">
+    tools:context="com.example.tartantransporttracker.ui.route.Admin_view_route">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
