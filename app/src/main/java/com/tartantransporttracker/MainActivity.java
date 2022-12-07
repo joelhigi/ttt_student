@@ -2,12 +2,17 @@ package com.tartantransporttracker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
 
+import com.tartantransporttracker.ui.route.AdminViewRoute;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.tartantransporttracker.databinding.ActivityMainBinding;
 import com.tartantransporttracker.managers.UserManager;
@@ -16,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity<ActivityMainBinding> {
+public class MainActivity extends BaseActivity<ActivityMainBinding> implements NavigationView.OnNavigationItemSelectedListener {
     private static final int RC_SIGN_IN = 123;
     private UserManager userManager = UserManager.getInstance();
     @Override
@@ -30,6 +35,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         setupListeners();
     }
     private void setupListeners(){
+        binding.navView.setNavigationItemSelectedListener(this);
         binding.goToLogin.setOnClickListener(view -> {
             if(userManager.isCurrentUserLogged()){
                 startMapActivity();
@@ -66,8 +72,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         this.handleResponseAfterSignIn(requestCode,resultCode,data);
     }
 
+    @Override
+    public void onBackPressed() {
+        if(binding.drawLayout.isDrawerOpen(GravityCompat.START)){
+            binding.drawLayout.closeDrawer(GravityCompat.START);
+        }
+        else{
+            super.onBackPressed();
+        }
+
+    }
+
     private void showSnackBar(String message){
-        Snackbar.make(binding.mainLayout, message,Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(binding.drawLayout, message,Snackbar.LENGTH_SHORT).show();
     }
 
     public void handleResponseAfterSignIn(int requestCode,int resultCode,Intent data){
@@ -106,5 +123,34 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     private void updateLoginButton(){
         binding.goToLogin.setText(userManager.isCurrentUserLogged() ? getString(R.string.button_login_text_logged) :
                 getString(R.string.button_login_text_not_logged));
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.view_routes:
+                Intent intent = new Intent(MainActivity.this, AdminViewRoute.class);
+                startActivity(intent);
+                break;
+
+            case R.id.logout_button:
+                Intent intent3 = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent3);
+                break;
+
+            //TODO: Dear Special Ops, Any other activities can be added below for easy navigation
+            //TODO: Just remember to use the switch below. Tie the ID to a menu item.
+//            case R.id.scans:
+//                Intent intent = new Intent(MainActivity.this,PastRecords.class);
+//                startActivity(intent);
+//                break;
+//
+//            case R.id.diseases:
+//                Intent intent1 = new Intent(MainActivity.this,MaizeDiseases.class);
+//                startActivity(intent1);
+//                break;
+        }
+        binding.drawLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

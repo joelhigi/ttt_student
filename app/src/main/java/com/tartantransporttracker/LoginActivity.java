@@ -9,7 +9,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.tartantransporttracker.ui.route.AdminViewRoute;
+import com.tartantransporttracker.ui.route.AdminViewRoute;
 import com.google.android.material.tabs.TabLayout;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
