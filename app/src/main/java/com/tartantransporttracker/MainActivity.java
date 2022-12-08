@@ -134,8 +134,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
                 break;
 
             case R.id.logout_button:
-                Intent intent3 = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent3);
+                userManager.signOut(this).addOnSuccessListener(aVoid ->{
+                    finish();
+                });
                 break;
 
             //TODO: Dear Special Ops, Any other activities can be added below for easy navigation
