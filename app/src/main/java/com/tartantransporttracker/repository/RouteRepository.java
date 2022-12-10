@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.tartantransporttracker.models.Role;
 import com.tartantransporttracker.models.Route;
@@ -39,7 +41,7 @@ public class RouteRepository {
     public  RouteRepository(){}
 
     public static RouteRepository getInstance(){
-        synchronized (UserRepository.class){
+        synchronized (RouteRepository.class){
            RouteRepository result = instance;
             if(result != null){
                 return  result;
@@ -86,6 +88,8 @@ public class RouteRepository {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for(DocumentSnapshot doc:list){
                                 Route route = doc.toObject(Route.class);
+                                Log.e("route id from repo", route.getId());
+                                Log.e("Route name from repo",route.getName());
                                 routes.add(route);
                             }
                         }else{
@@ -97,17 +101,18 @@ public class RouteRepository {
     }
 
     //Get Single route from firestore
-    public Task<DocumentSnapshot> getRoute(String name){
-        if(name !=null){
-            return  this.getRoutesCollection().document(name).get();
+    public Task<DocumentSnapshot> getRoute(String id){
+        if(id !=null){
+            return  this.getRoutesCollection().document(id).get();
         }
         return null;
     }
 
+
     // Update Route
-    public void updateRoute(String routeName,Route updatedRoute){
+    public void updateRoute(String id,Route updatedRoute){
         this.getRoutesCollection()
-                .document(routeName)
+                .document(id)
                 .set(updatedRoute)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -121,11 +126,10 @@ public class RouteRepository {
                     }
                 });
     }
-
     // Delete the Route from Firestore
-    public void deleteUserFromFirestore(String routeName) {
-        if(routeName != null){
-            this.getRoutesCollection().document(routeName).delete();
+    public void deleteRoute(String id) {
+        if(id != null){
+            this.getRoutesCollection().document(id).delete();
         }
     }
     

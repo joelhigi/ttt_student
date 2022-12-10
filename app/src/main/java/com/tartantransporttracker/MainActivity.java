@@ -1,13 +1,23 @@
 package com.tartantransporttracker;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 
+import com.tartantransporttracker.managers.RouteManager;
+import com.tartantransporttracker.models.Route;
 import com.tartantransporttracker.ui.route.AdminViewRoute;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -19,11 +29,15 @@ import com.tartantransporttracker.managers.UserManager;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> implements NavigationView.OnNavigationItemSelectedListener {
     private static final int RC_SIGN_IN = 123;
     private UserManager userManager = UserManager.getInstance();
+    private RouteManager routeManager = RouteManager.getInstance();
+    TextView userEmail;
+    List<Route> routes;
     @Override
     ActivityMainBinding getViewBinding() {
         return ActivityMainBinding.inflate(getLayoutInflater());
@@ -32,12 +46,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        routes = routeManager.findAllRoutes();
+         View hView = binding.navView.getHeaderView(0);
+
+         userEmail = hView.findViewById(R.id.email);
+
+         routes = routeManager.findAllRoutes();
         setupListeners();
     }
     private void setupListeners(){
         binding.navView.setNavigationItemSelectedListener(this);
         binding.goToLogin.setOnClickListener(view -> {
             if(userManager.isCurrentUserLogged()){
+                getUserData();
                 startMapActivity();
             } else{
                 startSignInActivity();
@@ -93,6 +114,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
             //success
             if(resultCode == RESULT_OK){
                 userManager.createUser();
+                getUserData();
                 showSnackBar(getString(R.string.connection_succeed));
             } else {
                 //ERRORS
@@ -113,6 +135,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
     protected  void onResume() {
         super.onResume();
         updateLoginButton();
+    }
+
+    private void getUserData(){
+        userManager.getUserData().addOnSuccessListener(user->{
+//            String username = TextUtils.isEmpty(user.getUsername()) ?
+//                    getString(R.string.info_no_username_found) : user.getUsername();
+            Log.e("In Get user function",user.getUsername());
+            userEmail.setText(user.getUsername());
+        });
     }
 
     private void startMapActivity(){
@@ -138,6 +169,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
                     finish();
                 });
                 break;
+            case R.id.language_btn:
+                showChangeLanguageDialog();
+                break;
 
             //TODO: Dear Special Ops, Any other activities can be added below for easy navigation
             //TODO: Just remember to use the switch below. Tie the ID to a menu item.
@@ -153,5 +187,42 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
         }
         binding.drawLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void showChangeLanguageDialog(){
+        final String[] languages = {"French", "English"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setSingleChoiceItems(languages, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                if (i == 0){
+                    setLocale("fr");
+                    recreate();
+                }else{
+                    setLocale("en");
+                    recreate();
+                }
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void setLocale(String lang){
+        Locale locale = new Locale(lang);
+        locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+    }
+
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = prefs.getString("My_Lang", "");
+        setLocale(language);
     }
 }
