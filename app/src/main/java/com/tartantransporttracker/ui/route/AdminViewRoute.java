@@ -19,27 +19,27 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.tartantransporttracker.BaseActivity;
+import com.tartantransporttracker.DrawerBaseActivity;
 import com.tartantransporttracker.MainActivity;
 import com.tartantransporttracker.R;
 import com.tartantransporttracker.databinding.ActivityAdminViewRouteBinding;
 import com.tartantransporttracker.databinding.ActivityMainBinding;
 
 
-public class AdminViewRoute extends BaseActivity<ActivityAdminViewRouteBinding> implements View.OnClickListener {
+public class AdminViewRoute extends DrawerBaseActivity implements View.OnClickListener {
 
     private AppBarConfiguration appBarConfiguration;
+    ActivityAdminViewRouteBinding activityAdminViewRouteBinding;
 
     Button deleteBtn;
 
-    @Override
-    public ActivityAdminViewRouteBinding getViewBinding() {
-        return ActivityAdminViewRouteBinding.inflate(getLayoutInflater());
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_route);
+        activityAdminViewRouteBinding = activityAdminViewRouteBinding.inflate(getLayoutInflater());
+        setContentView(activityAdminViewRouteBinding.getRoot());
+        nameActivityTitle("View Route");
         deleteBtn = findViewById(R.id.deleteBtn);
     }
 

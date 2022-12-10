@@ -33,6 +33,7 @@
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="notification_title">you have received a notification</string>
-
+    <string name="menu_drawer_open" translatable="false">Drawer open</string>
+    <string name="menu_drawer_close" translatable="false">Drawer close</string>
 
 </resources>
