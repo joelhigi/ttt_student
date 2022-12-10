@@ -10,6 +10,7 @@ public class User {
     @Nullable
     private String urlPicture;
 
+    private Route preferredRoute;
 
     public User() {
     }
@@ -58,5 +59,13 @@ public class User {
 
     public void setUrlPicture(@Nullable String _urlPicture) {
         urlPicture = _urlPicture;
+    }
+
+    public Route getPreferredRoute() {
+        return preferredRoute;
+    }
+
+    public void setPreferredRoute(Route preferredRoute) {
+        this.preferredRoute = preferredRoute;
     }
 }

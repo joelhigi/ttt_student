@@ -41,7 +41,7 @@ public class RouteRepository {
     public  RouteRepository(){}
 
     public static RouteRepository getInstance(){
-        synchronized (BusRepository.class){
+        synchronized (RouteRepository.class){
            RouteRepository result = instance;
             if(result != null){
                 return  result;
@@ -80,29 +80,8 @@ public class RouteRepository {
     // get all data from firestore
     public Task<QuerySnapshot> findAll(){
         List<Route> routes = new ArrayList<>();
-        Log.e("================Before ===========", String.valueOf(routes.size()));
         return this.getRoutesCollection().get();
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                        if(!queryDocumentSnapshots.isEmpty()){
-//                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-//                            for(DocumentSnapshot doc:list){
-//                                Route route = doc.toObject(Route.class);
-//                                Log.e("================Document route: ===========", doc.get("name").toString());
-//                                Log.e("================Document get name: ===========", route.getName());
-//                                routes.add(route);
-//
-//                            }
-//                        }else{
-//                            Log.w(TAG,"No data found in the database");
-//                        }
-//                    }
-//                });
-//        Log.e("================After: ===========", String.valueOf(routes.size()));
-//        return routes;
     }
-
 
     //Get Single route from firestore
     public Task<DocumentSnapshot> getRoute(String id){
@@ -113,12 +92,10 @@ public class RouteRepository {
     }
 
 
-
-
     // Update Route
-    public void updateRoute(String routeName,Route updatedRoute){
+    public void updateRoute(String id,Route updatedRoute){
         this.getRoutesCollection()
-                .document(routeName)
+                .document(id)
                 .set(updatedRoute)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -132,12 +109,10 @@ public class RouteRepository {
                     }
                 });
     }
-
     // Delete the Route from Firestore
-    public void deleteRoute(String routeName) {
-//        String docId = this.findDocId(routeName);
-        if(routeName != null){
-            this.getRoutesCollection().document(routeName).delete();
+    public void deleteRoute(String id) {
+        if(id != null){
+            this.getRoutesCollection().document(id).delete();
         }
     }
     

@@ -1,10 +1,20 @@
 package com.tartantransporttracker;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,44 +34,64 @@ import com.tartantransporttracker.managers.UserManager;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 
-public class MainActivity extends BaseActivity<ActivityMainBinding> implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity<ActivityMainBinding>  {
     private static final int RC_SIGN_IN = 123;
+    private static final int SPLASH_SCREEN = 5000;
     private UserManager userManager = UserManager.getInstance();
     private RouteManager routeManager = RouteManager.getInstance();
-    TextView userEmail;
-    List<Route> routes;
+    private TextView userEmail, welcome;
+    private List<Route> routes;
+    private Animation top, bottom;
+    private ImageView bus, logo;
     @Override
-    ActivityMainBinding getViewBinding() {
+    public ActivityMainBinding getViewBinding() {
         return ActivityMainBinding.inflate(getLayoutInflater());
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        routes = routeManager.findAllRoutes();
-         View hView = binding.navView.getHeaderView(0);
-         userEmail = hView.findViewById(R.id.email);
-//        Route route = new Route("Route 5");
-//        routeManager.createRoute(route);
-//        userManager.getUserData().addOnSuccessListener(user->{
-//            userEmail.setText(user.getUsername());
-//        });
-        routeManager.deleteRoute("Route 5");
-        setupListeners();
-    }
-    private void setupListeners(){
-        binding.navView.setNavigationItemSelectedListener(this);
-        binding.goToLogin.setOnClickListener(view -> {
-            if(userManager.isCurrentUserLogged()){
-                getUserData();
-                startMapActivity();
-            } else{
-                startSignInActivity();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        top = AnimationUtils.loadAnimation(this,R.anim.top_anim);
+        bottom = AnimationUtils.loadAnimation(this, R.anim.bottom_anim);
+        bus = findViewById(R.id.imageView2);
+        welcome = findViewById(R.id.welcome);
+        logo = findViewById(R.id.logo);
+        bus.setAnimation(top);
+        logo.setAnimation(bottom);
+        welcome.setAnimation(bottom);
+
+        View hView = binding.navView.getHeaderView(0);
+        userEmail = hView.findViewById(R.id.email);
+
+         new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (userManager.isCurrentUserLogged()) {
+//                    getUserData();
+                    startMapActivity();
+                } else {
+                    startSignInActivity();
+                }
+//                finish();
             }
-        });
+        }, SPLASH_SCREEN);
+//        setupListeners();
     }
+//    private void setupListeners(){
+//        binding.navView.setNavigationItemSelectedListener(this);
+//        binding.goToLogin.setOnClickListener(view -> {
+//            if(userManager.isCurrentUserLogged()){
+//                getUserData();
+//                startMapActivity();
+//            } else{
+//                startSignInActivity();
+//            }
+//        });
+//    }
 
 
     private void startSignInActivity(){
@@ -111,7 +141,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
             //success
             if(resultCode == RESULT_OK){
                 userManager.createUser();
-                getUserData();
+                startMapActivity();
+//                getUserData();
                 showSnackBar(getString(R.string.connection_succeed));
             } else {
                 //ERRORS
@@ -131,7 +162,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
     @Override
     protected  void onResume() {
         super.onResume();
-        updateLoginButton();
+//        updateLoginButton();
     }
 
     private void getUserData(){
@@ -148,38 +179,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
         startActivity(intent);
     }
 
-    private void updateLoginButton(){
-        binding.goToLogin.setText(userManager.isCurrentUserLogged() ? getString(R.string.button_login_text_logged) :
-                getString(R.string.button_login_text_not_logged));
-    }
+//    private void updateLoginButton(){
+//        binding.goToLogin.setText(userManager.isCurrentUserLogged() ? getString(R.string.button_login_text_logged) :
+//                getString(R.string.button_login_text_not_logged));
+//    }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.view_routes:
-                Intent intent = new Intent(MainActivity.this, AdminViewRoute.class);
-                startActivity(intent);
-                break;
 
-            case R.id.logout_button:
-                userManager.signOut(this).addOnSuccessListener(aVoid ->{
-                    finish();
-                });
-                break;
-
-            //TODO: Dear Special Ops, Any other activities can be added below for easy navigation
-            //TODO: Just remember to use the switch below. Tie the ID to a menu item.
-//            case R.id.scans:
-//                Intent intent = new Intent(MainActivity.this,PastRecords.class);
-//                startActivity(intent);
-//                break;
-//
-//            case R.id.diseases:
-//                Intent intent1 = new Intent(MainActivity.this,MaizeDiseases.class);
-//                startActivity(intent1);
-//                break;
-        }
-        binding.drawLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }
