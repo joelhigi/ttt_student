@@ -1,6 +1,11 @@
 package com.tartantransporttracker;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -19,6 +24,7 @@ import com.tartantransporttracker.managers.UserManager;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> implements NavigationView.OnNavigationItemSelectedListener {
@@ -138,6 +144,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
                     finish();
                 });
                 break;
+            case R.id.language_btn:
+                showChangeLanguageDialog();
+                break;
 
             //TODO: Dear Special Ops, Any other activities can be added below for easy navigation
             //TODO: Just remember to use the switch below. Tie the ID to a menu item.
@@ -153,5 +162,42 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
         }
         binding.drawLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void showChangeLanguageDialog(){
+        final String[] languages = {"French", "English"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setSingleChoiceItems(languages, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                if (i == 0){
+                    setLocale("fr");
+                    recreate();
+                }else{
+                    setLocale("en");
+                    recreate();
+                }
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void setLocale(String lang){
+        Locale locale = new Locale(lang);
+        locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+    }
+
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = prefs.getString("My_Lang", "");
+        setLocale(language);
     }
 }
