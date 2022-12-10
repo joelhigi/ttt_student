@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TartanTransportTracker"
         tools:targetApi="31">
         <activity
-            android:name=".CreateBusStopActivity"
+            android:name=".ui.route.CreateBusStopActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

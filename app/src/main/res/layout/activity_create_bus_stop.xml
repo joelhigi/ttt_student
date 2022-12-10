@@ -44,7 +44,6 @@
         android:padding="10dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/menu"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,15 +53,14 @@
             android:hint="@string/bus_stop_label">
 
             <AutoCompleteTextView
+                android:id="@+id/selectRouteSpinner"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                />
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cmu"
@@ -71,16 +69,14 @@
             android:layout_marginEnd="32dp"
             android:hint="@string/bus_stop_address">
 
-            <!--this is the actual edit text which takes the input-->
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/position"
+                android:id="@+id/edtAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtPosition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cmu"
@@ -89,9 +85,8 @@
             android:layout_marginEnd="32dp"
             android:hint="@string/bus_stop_position">
 
-            <!--this is the actual edit text which takes the input-->
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/route_name"
+                android:id="@+id/edtPosition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
