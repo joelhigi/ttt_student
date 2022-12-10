@@ -7,9 +7,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,39 +37,63 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class MainActivity extends BaseActivity<ActivityMainBinding> implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity<ActivityMainBinding>  {
     private static final int RC_SIGN_IN = 123;
+    private static final int SPLASH_SCREEN = 5000;
     private UserManager userManager = UserManager.getInstance();
     private RouteManager routeManager = RouteManager.getInstance();
-    TextView userEmail;
-    List<Route> routes;
+    private TextView userEmail, welcome;
+    private List<Route> routes;
+    private Animation top, bottom;
+    private ImageView bus, logo;
     @Override
-    ActivityMainBinding getViewBinding() {
+    public ActivityMainBinding getViewBinding() {
         return ActivityMainBinding.inflate(getLayoutInflater());
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        top = AnimationUtils.loadAnimation(this,R.anim.top_anim);
+        bottom = AnimationUtils.loadAnimation(this, R.anim.bottom_anim);
+        bus = findViewById(R.id.imageView2);
+        welcome = findViewById(R.id.welcome);
+        logo = findViewById(R.id.logo);
+        bus.setAnimation(top);
+        logo.setAnimation(bottom);
+        welcome.setAnimation(bottom);
         routes = routeManager.findAllRoutes();
-         View hView = binding.navView.getHeaderView(0);
 
-         userEmail = hView.findViewById(R.id.email);
+        View hView = binding.navView.getHeaderView(0);
+        userEmail = hView.findViewById(R.id.email);
+        routes = routeManager.findAllRoutes();
 
-         routes = routeManager.findAllRoutes();
-        setupListeners();
-    }
-    private void setupListeners(){
-        binding.navView.setNavigationItemSelectedListener(this);
-        binding.goToLogin.setOnClickListener(view -> {
-            if(userManager.isCurrentUserLogged()){
-                getUserData();
-                startMapActivity();
-            } else{
-                startSignInActivity();
+         new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (userManager.isCurrentUserLogged()) {
+//                    getUserData();
+                    startMapActivity();
+                } else {
+                    startSignInActivity();
+                }
+//                finish();
             }
-        });
+        }, SPLASH_SCREEN);
+//        setupListeners();
     }
+//    private void setupListeners(){
+//        binding.navView.setNavigationItemSelectedListener(this);
+//        binding.goToLogin.setOnClickListener(view -> {
+//            if(userManager.isCurrentUserLogged()){
+//                getUserData();
+//                startMapActivity();
+//            } else{
+//                startSignInActivity();
+//            }
+//        });
+//    }
 
 
     private void startSignInActivity(){
@@ -114,7 +143,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
             //success
             if(resultCode == RESULT_OK){
                 userManager.createUser();
-                getUserData();
+                startMapActivity();
+//                getUserData();
                 showSnackBar(getString(R.string.connection_succeed));
             } else {
                 //ERRORS
@@ -134,7 +164,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
     @Override
     protected  void onResume() {
         super.onResume();
-        updateLoginButton();
+//        updateLoginButton();
     }
 
     private void getUserData(){
@@ -151,78 +181,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
         startActivity(intent);
     }
 
-    private void updateLoginButton(){
-        binding.goToLogin.setText(userManager.isCurrentUserLogged() ? getString(R.string.button_login_text_logged) :
-                getString(R.string.button_login_text_not_logged));
-    }
+//    private void updateLoginButton(){
+//        binding.goToLogin.setText(userManager.isCurrentUserLogged() ? getString(R.string.button_login_text_logged) :
+//                getString(R.string.button_login_text_not_logged));
+//    }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.view_routes:
-                Intent intent = new Intent(MainActivity.this, AdminViewRoute.class);
-                startActivity(intent);
-                break;
 
-            case R.id.logout_button:
-                userManager.signOut(this).addOnSuccessListener(aVoid ->{
-                    finish();
-                });
-                break;
-            case R.id.language_btn:
-                showChangeLanguageDialog();
-                break;
-
-            //TODO: Dear Special Ops, Any other activities can be added below for easy navigation
-            //TODO: Just remember to use the switch below. Tie the ID to a menu item.
-//            case R.id.scans:
-//                Intent intent = new Intent(MainActivity.this,PastRecords.class);
-//                startActivity(intent);
-//                break;
-//
-//            case R.id.diseases:
-//                Intent intent1 = new Intent(MainActivity.this,MaizeDiseases.class);
-//                startActivity(intent1);
-//                break;
-        }
-        binding.drawLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    public void showChangeLanguageDialog(){
-        final String[] languages = {"French", "English"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setSingleChoiceItems(languages, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-                if (i == 0){
-                    setLocale("fr");
-                    recreate();
-                }else{
-                    setLocale("en");
-                    recreate();
-                }
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    public void setLocale(String lang){
-        Locale locale = new Locale(lang);
-        locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-        editor.putString("My_Lang", lang);
-        editor.apply();
-    }
-
-    public void loadLocale(){
-        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
-        String language = prefs.getString("My_Lang", "");
-        setLocale(language);
-    }
 }
