@@ -22,6 +22,7 @@
     <string name="button_login_text_not_logged">Log In</string>
     <string name="title_activity_admin_view_route" translatable="false">Admin_view_route</string>
     <!-- Strings used for fragments for navigation -->
+
     <string name="first_fragment_label" translatable="false">First Fragment</string>
     <string name="second_fragment_label" translatable="false">Second Fragment</string>
     <string name="next" translatable="false">Next</string>
@@ -29,6 +30,9 @@
 
     <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
     <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="notification_title">you have received a notification</string>
 
 
 </resources>

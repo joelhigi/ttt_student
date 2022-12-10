@@ -15,4 +15,5 @@
     <string name="button_login_text_logged">Voir la carte</string>
     <string name="button_login_text_not_logged">Connexion</string>
     <string name="change_language">Langue</string>
+    <string name="notification_title">Vous avez reçu une notification</string>
 </resources>

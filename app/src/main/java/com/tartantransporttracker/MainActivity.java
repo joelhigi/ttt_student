@@ -7,12 +7,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 
+import com.tartantransporttracker.managers.RouteManager;
+import com.tartantransporttracker.models.Route;
 import com.tartantransporttracker.ui.route.AdminViewRoute;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -30,6 +35,9 @@ import java.util.Locale;
 public class MainActivity extends BaseActivity<ActivityMainBinding> implements NavigationView.OnNavigationItemSelectedListener {
     private static final int RC_SIGN_IN = 123;
     private UserManager userManager = UserManager.getInstance();
+    private RouteManager routeManager = RouteManager.getInstance();
+    TextView userEmail;
+    List<Route> routes;
     @Override
     ActivityMainBinding getViewBinding() {
         return ActivityMainBinding.inflate(getLayoutInflater());
@@ -38,12 +46,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        routes = routeManager.findAllRoutes();
+         View hView = binding.navView.getHeaderView(0);
+
+         userEmail = hView.findViewById(R.id.email);
+
+         routes = routeManager.findAllRoutes();
         setupListeners();
     }
     private void setupListeners(){
         binding.navView.setNavigationItemSelectedListener(this);
         binding.goToLogin.setOnClickListener(view -> {
             if(userManager.isCurrentUserLogged()){
+                getUserData();
                 startMapActivity();
             } else{
                 startSignInActivity();
@@ -99,6 +114,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
             //success
             if(resultCode == RESULT_OK){
                 userManager.createUser();
+                getUserData();
                 showSnackBar(getString(R.string.connection_succeed));
             } else {
                 //ERRORS
@@ -119,6 +135,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
     protected  void onResume() {
         super.onResume();
         updateLoginButton();
+    }
+
+    private void getUserData(){
+        userManager.getUserData().addOnSuccessListener(user->{
+//            String username = TextUtils.isEmpty(user.getUsername()) ?
+//                    getString(R.string.info_no_username_found) : user.getUsername();
+            Log.e("In Get user function",user.getUsername());
+            userEmail.setText(user.getUsername());
+        });
     }
 
     private void startMapActivity(){
