@@ -39,7 +39,7 @@ import java.util.Locale;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding>  {
     private static final int RC_SIGN_IN = 123;
-    private static final int SPLASH_SCREEN = 5000;
+    private static final int SPLASH_SCREEN = 3000;
     private UserManager userManager = UserManager.getInstance();
     private RouteManager routeManager = RouteManager.getInstance();
     private TextView userEmail, welcome;
@@ -50,10 +50,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>  {
     public ActivityMainBinding getViewBinding() {
         return ActivityMainBinding.inflate(getLayoutInflater());
     }
+    ActivityMainBinding activityMainBinding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(activityMainBinding.getRoot());
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         top = AnimationUtils.loadAnimation(this,R.anim.top_anim);
         bottom = AnimationUtils.loadAnimation(this, R.anim.bottom_anim);
@@ -65,9 +68,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>  {
         welcome.setAnimation(bottom);
         routes = routeManager.findAllRoutes();
 
-        View hView = binding.navView.getHeaderView(0);
-        userEmail = hView.findViewById(R.id.email);
-        routes = routeManager.findAllRoutes();
+//        View hView = binding.navView.getHeaderView(0);
+//        userEmail = hView.findViewById(R.id.email);
+//        routes = routeManager.findAllRoutes();
 
          new Handler().postDelayed(new Runnable() {
             @Override
@@ -122,16 +125,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>  {
         this.handleResponseAfterSignIn(requestCode,resultCode,data);
     }
 
-    @Override
-    public void onBackPressed() {
-        if(binding.drawLayout.isDrawerOpen(GravityCompat.START)){
-            binding.drawLayout.closeDrawer(GravityCompat.START);
-        }
-        else{
-            super.onBackPressed();
-        }
-
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if(binding.drawLayout.isDrawerOpen(GravityCompat.START)){
+//            binding.drawLayout.closeDrawer(GravityCompat.START);
+//        }
+//        else{
+//            super.onBackPressed();
+//        }
+//
+//    }
 
     private void showSnackBar(String message){
         Snackbar.make(binding.drawLayout, message,Snackbar.LENGTH_SHORT).show();
@@ -145,7 +148,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>  {
                 userManager.createUser();
                 startMapActivity();
 //                getUserData();
-                showSnackBar(getString(R.string.connection_succeed));
+//                showSnackBar(getString(R.string.connection_succeed));
             } else {
                 //ERRORS
                 if(response == null){
