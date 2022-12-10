@@ -26,4 +26,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="create_route">Create Route</string>
+    <string name="create_bus_stop">Create Bus Stop</string>
+    <string name="bus_stop_position">Bus Stop Position</string>
+    <string name="bus_stop_label">Choose Route</string>
+    <string name="bus_stop_address">Bus Stop Address</string>
+    <string name="route_name_label">Route Name</string>
 </resources>
