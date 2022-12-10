@@ -143,26 +143,32 @@
         android:scrollbars="none"
         app:cardCornerRadius="30dp">
 
-        <LinearLayout
+<!--        <LinearLayout-->
+<!--            android:id="@+id/listOfRoute"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/white"-->
+<!--            android:orientation="vertical">-->
+
+<!--&lt;!&ndash;            <include layout="@layout/route_item" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <include layout="@layout/route_item" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <include layout="@layout/route_item" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <include layout="@layout/route_item" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <include layout="@layout/route_item" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <include layout="@layout/route_item" />&ndash;&gt;-->
+
+<!--        </LinearLayout>-->
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listOfRoute"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:orientation="vertical">
-
-            <include layout="@layout/route_item" />
-
-            <include layout="@layout/route_item" />
-
-            <include layout="@layout/route_item" />
-
-            <include layout="@layout/route_item" />
-
-            <include layout="@layout/route_item" />
-
-            <include layout="@layout/route_item" />
-
-        </LinearLayout>
+            android:orientation="vertical"/>
     </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

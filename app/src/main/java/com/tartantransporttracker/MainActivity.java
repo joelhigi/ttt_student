@@ -40,9 +40,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        routes = routeManager.findAllRoutes();
+//        routes = routeManager.findAllRoutes();
          View hView = binding.navView.getHeaderView(0);
-
          userEmail = hView.findViewById(R.id.email);
 //        Route route = new Route("Route 5");
 //        routeManager.createRoute(route);

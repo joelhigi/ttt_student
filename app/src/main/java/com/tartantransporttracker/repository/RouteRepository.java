@@ -78,24 +78,29 @@ public class RouteRepository {
     }
 
     // get all data from firestore
-    public List<Route> findAll(){
+    public Task<QuerySnapshot> findAll(){
         List<Route> routes = new ArrayList<>();
-        this.getRoutesCollection().get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(!queryDocumentSnapshots.isEmpty()){
-                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                            for(DocumentSnapshot doc:list){
-                                Route route = doc.toObject(Route.class);
-                                routes.add(route);
-                            }
-                        }else{
-                            Log.w(TAG,"No data found in the database");
-                        }
-                    }
-                });
-        return routes;
+        Log.e("================Before ===========", String.valueOf(routes.size()));
+        return this.getRoutesCollection().get();
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                        if(!queryDocumentSnapshots.isEmpty()){
+//                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+//                            for(DocumentSnapshot doc:list){
+//                                Route route = doc.toObject(Route.class);
+//                                Log.e("================Document route: ===========", doc.get("name").toString());
+//                                Log.e("================Document get name: ===========", route.getName());
+//                                routes.add(route);
+//
+//                            }
+//                        }else{
+//                            Log.w(TAG,"No data found in the database");
+//                        }
+//                    }
+//                });
+//        Log.e("================After: ===========", String.valueOf(routes.size()));
+//        return routes;
     }
 
 
