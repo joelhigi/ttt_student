@@ -41,7 +41,7 @@ public class RouteRepository {
     public  RouteRepository(){}
 
     public static RouteRepository getInstance(){
-        synchronized (BusRepository.class){
+        synchronized (RouteRepository.class){
            RouteRepository result = instance;
             if(result != null){
                 return  result;
@@ -88,6 +88,8 @@ public class RouteRepository {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for(DocumentSnapshot doc:list){
                                 Route route = doc.toObject(Route.class);
+                                Log.e("route id from repo", route.getId());
+                                Log.e("Route name from repo",route.getName());
                                 routes.add(route);
                             }
                         }else{
@@ -98,7 +100,6 @@ public class RouteRepository {
         return routes;
     }
 
-
     //Get Single route from firestore
     public Task<DocumentSnapshot> getRoute(String id){
         if(id !=null){
@@ -108,12 +109,10 @@ public class RouteRepository {
     }
 
 
-
-
     // Update Route
-    public void updateRoute(String routeName,Route updatedRoute){
+    public void updateRoute(String id,Route updatedRoute){
         this.getRoutesCollection()
-                .document(routeName)
+                .document(id)
                 .set(updatedRoute)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -127,12 +126,10 @@ public class RouteRepository {
                     }
                 });
     }
-
     // Delete the Route from Firestore
-    public void deleteRoute(String routeName) {
-//        String docId = this.findDocId(routeName);
-        if(routeName != null){
-            this.getRoutesCollection().document(routeName).delete();
+    public void deleteRoute(String id) {
+        if(id != null){
+            this.getRoutesCollection().document(id).delete();
         }
     }
     

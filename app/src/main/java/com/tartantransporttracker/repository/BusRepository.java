@@ -26,7 +26,7 @@ public class BusRepository {
     public  BusRepository(){}
 
     public static BusRepository getInstance(){
-        synchronized (UserRepository.class){
+        synchronized (BusRepository.class){
             BusRepository result = instance;
             if(result != null){
                 return  result;
@@ -94,9 +94,9 @@ public class BusRepository {
 
 
     // Update BusStop
-    public void updateBusStop(String routeName,BusStop updatedBusStop){
+    public void updateBusStop(String id,BusStop updatedBusStop){
         this.getBusStopsCollection()
-                .document(routeName)
+                .document(id)
                 .set(updatedBusStop)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -112,10 +112,9 @@ public class BusRepository {
     }
 
     // Delete the BusStop from Firestore
-    public void deleteBusStop(String routeName) {
-//        String docId = this.findDocId(routeName);
-        if(routeName != null){
-            this.getBusStopsCollection().document(routeName).delete();
+    public void deleteBusStop(String id) {
+        if(id != null){
+            this.getBusStopsCollection().document(id).delete();
         }
     }
 }

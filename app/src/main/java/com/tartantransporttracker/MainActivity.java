@@ -44,12 +44,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
          View hView = binding.navView.getHeaderView(0);
 
          userEmail = hView.findViewById(R.id.email);
-//        Route route = new Route("Route 5");
-//        routeManager.createRoute(route);
-//        userManager.getUserData().addOnSuccessListener(user->{
-//            userEmail.setText(user.getUsername());
-//        });
-        routeManager.deleteRoute("Route 5");
+
+         routes = routeManager.findAllRoutes();
         setupListeners();
     }
     private void setupListeners(){
