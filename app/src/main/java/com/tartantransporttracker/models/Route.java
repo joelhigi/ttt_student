@@ -9,8 +9,7 @@ public class Route {
     private String id;
     private String name;
 
-    private List<BusStop> busStopList;
-
+    private List<User> students;
 
 
     public Route() {
@@ -37,11 +36,11 @@ public class Route {
         this.name = name;
     }
 
-    public List<BusStop> getBusStopList() {
-        return busStopList;
+    public List<User> getStudents() {
+        return students;
     }
 
-    public void setBusStopList(List<BusStop> busStopList) {
-        this.busStopList = busStopList;
+    public void setStudents(List<User> _users) {
+        students = _users;
     }
 }
