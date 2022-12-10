@@ -1,29 +1,43 @@
 package com.tartantransporttracker.ui.route;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.navigation.NavigationView;
+import com.tartantransporttracker.BaseActivity;
+import com.tartantransporttracker.MainActivity;
 import com.tartantransporttracker.R;
+import com.tartantransporttracker.databinding.ActivityAdminViewRouteBinding;
+import com.tartantransporttracker.databinding.ActivityMainBinding;
 
 
-public class AdminViewRoute extends AppCompatActivity implements View.OnClickListener {
+public class AdminViewRoute extends BaseActivity<ActivityAdminViewRouteBinding> implements View.OnClickListener {
 
     private AppBarConfiguration appBarConfiguration;
 
     Button deleteBtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public ActivityAdminViewRouteBinding getViewBinding() {
+        return ActivityAdminViewRouteBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_route);
         deleteBtn = findViewById(R.id.deleteBtn);
@@ -55,5 +69,6 @@ public class AdminViewRoute extends AppCompatActivity implements View.OnClickLis
         });
         alert.show();
     }
+
 
 }

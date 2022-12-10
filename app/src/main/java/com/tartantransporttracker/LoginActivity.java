@@ -9,16 +9,23 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.tartantransporttracker.databinding.ActivityLoginBinding;
 import com.tartantransporttracker.ui.route.AdminViewRoute;
 import com.google.android.material.tabs.TabLayout;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener{
     ViewPager viewPager;
     TabLayout tabLayout;
     Button signupBtn;
+
+    @Override
+    public ActivityLoginBinding getViewBinding() {
+        return ActivityLoginBinding.inflate(getLayoutInflater());
+    }
+
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
