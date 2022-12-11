@@ -13,14 +13,21 @@
         android:theme="@style/Theme.TartanTransportTracker"
         tools:targetApi="31">
         <activity
-            android:name=".dashboard"
+            android:name=".UpdateRouteActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".DrawerBaseActivity"
+            android:name=".ui.route.CreateBusStopActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.route.CreateRouteActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

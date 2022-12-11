@@ -16,6 +16,10 @@
             android:title="@string/logout"
             android:icon="@drawable/logout_icon"/>
 
+<!--        <item-->
+<!--            android:id="@+id/manageRoute"-->
+<!--            android:title="View route"-->
+<!--            android:icon="@drawable/view_route_icon"/>-->
 
     </group>
 
