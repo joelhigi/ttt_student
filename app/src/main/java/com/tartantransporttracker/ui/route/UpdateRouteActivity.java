@@ -12,49 +12,43 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.tartantransporttracker.R;
 import com.tartantransporttracker.managers.RouteManager;
 import com.tartantransporttracker.models.Route;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CreateRouteActivity extends AppCompatActivity {
+public class UpdateRouteActivity extends AppCompatActivity {
 
-    Button btnAddRoute;
-    Button btnViewStops;
-    EditText routeName;
-    RouteManager routeManager;
+    private Button updateBtn;
+    private EditText edtName;
+    private RouteManager routeManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_route);
+        setContentView(R.layout.activity_update_route);
 
+        updateBtn = (Button) findViewById(R.id.btnUpdateRoute);
+        edtName = findViewById(R.id.route_name);
         routeManager = new RouteManager();
 
-        btnAddRoute = (Button) findViewById(R.id.createRouteBtn);
-        btnViewStops = findViewById(R.id.viewStops);
-
-        routeName = findViewById(R.id.route_name);
-
-        btnAddRoute.setOnClickListener(new View.OnClickListener() {
+        updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = routeName.getText().toString();
+                String name = edtName.getText().toString();
 
                 Boolean routeExists = routeExists(name);
                 if (!routeExists) {
                     Route route = new Route(name);
                     routeManager.createRoute(route);
 
-                    routeName.setText("");
-                    routeName.clearFocus();
+                    edtName.setText("");
+                    edtName.clearFocus();
 
                     Toast.makeText(getApplicationContext(), "Route created", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), AdminViewRoute.class);
@@ -62,14 +56,6 @@ public class CreateRouteActivity extends AppCompatActivity {
                 } else {
 
                 }
-            }
-        });
-
-        btnViewStops.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CreateBusStopActivity.class);
-                startActivity(intent);
             }
         });
     }

@@ -11,7 +11,6 @@ public class Route {
 
     private List<User> students;
 
-
     public Route() {
     }
 

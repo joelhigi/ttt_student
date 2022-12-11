@@ -21,6 +21,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.tartantransporttracker.managers.RouteManager;
 import com.tartantransporttracker.models.Route;
 import com.tartantransporttracker.ui.route.AdminViewRoute;
@@ -31,7 +35,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.tartantransporttracker.databinding.ActivityMainBinding;
 import com.tartantransporttracker.managers.UserManager;
+import com.tartantransporttracker.ui.route.CreateBusStopActivity;
+import com.tartantransporttracker.ui.route.CreateRouteActivity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -175,7 +183,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>  {
     }
 
     private void startMapActivity(){
-        Intent intent = new Intent(this,MapActivity.class);
+        Intent intent = new Intent(this, CreateRouteActivity.class);
         startActivity(intent);
     }
 
