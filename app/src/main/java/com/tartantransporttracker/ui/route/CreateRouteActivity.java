@@ -15,7 +15,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.tartantransporttracker.DrawerBaseActivity;
 import com.tartantransporttracker.R;
+import com.tartantransporttracker.databinding.ActivityCreateRouteBinding;
 import com.tartantransporttracker.managers.RouteManager;
 import com.tartantransporttracker.models.Route;
 
@@ -24,17 +26,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CreateRouteActivity extends AppCompatActivity {
+public class CreateRouteActivity extends DrawerBaseActivity {
 
     Button btnAddRoute;
     Button btnViewStops;
     EditText routeName;
     RouteManager routeManager;
 
+    ActivityCreateRouteBinding activityCreateRouteBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_route);
+        activityCreateRouteBinding = activityCreateRouteBinding.inflate(getLayoutInflater());
+        setContentView(activityCreateRouteBinding.getRoot());
+        nameActivityTitle("Create Route");
 
         routeManager = new RouteManager();
 
