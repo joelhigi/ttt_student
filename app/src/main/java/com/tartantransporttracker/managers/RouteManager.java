@@ -38,7 +38,7 @@ public class RouteManager {
         routeRepository.createRoute(route);
     }
 
-    public List<Route> findAllRoutes(){
+    public Task<QuerySnapshot> findAllRoutes(){
         return routeRepository.findAll();
     }
 

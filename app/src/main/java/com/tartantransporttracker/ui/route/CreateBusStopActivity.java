@@ -55,6 +55,7 @@ public class CreateBusStopActivity extends AppCompatActivity {
         spinner = findViewById(R.id.selectRouteSpinner);
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, items);
         spinner.setAdapter(adapter);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
