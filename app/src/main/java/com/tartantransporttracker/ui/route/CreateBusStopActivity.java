@@ -33,7 +33,6 @@ import java.util.List;
 public class CreateBusStopActivity extends AppCompatActivity {
 
     private ArrayList<Route> items;
-//    private List<Route> routes;
     private Spinner spinner;
     private Button btnCreateBusStop;
     private EditText edt_address;
@@ -114,18 +113,18 @@ public class CreateBusStopActivity extends AppCompatActivity {
     {
         ArrayList<Route> allRoutes = new ArrayList<>();
         routeManager.findAllRoutes().addOnCompleteListener(
-            new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful())
-                    {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Route route = document.toObject(Route.class);
-                            items.add(route);
+                new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful())
+                        {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Route route = document.toObject(Route.class);
+                                items.add(route);
+                            }
                         }
                     }
                 }
-            }
         );
         return allRoutes;
     }
