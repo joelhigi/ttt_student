@@ -32,6 +32,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.android.material.navigation.NavigationView;
 import com.tartantransporttracker.BaseActivity;
+import com.tartantransporttracker.DrawerBaseActivity;
 import com.tartantransporttracker.MainActivity;
 import com.tartantransporttracker.R;
 import com.tartantransporttracker.managers.RouteManager;
@@ -43,10 +44,10 @@ import java.util.List;
 import com.tartantransporttracker.databinding.ActivityAdminViewRouteBinding;
 import com.tartantransporttracker.databinding.ActivityMainBinding;
 
-
-public class AdminViewRoute extends BaseActivity<ActivityAdminViewRouteBinding>{
+public class AdminViewRoute extends DrawerBaseActivity implements View.OnClickListener {
 
     private AppBarConfiguration appBarConfiguration;
+    ActivityAdminViewRouteBinding activityAdminViewRouteBinding;
 
     Button deleteBtn;
     FloatingActionButton floatingActionButton;
@@ -54,15 +55,11 @@ public class AdminViewRoute extends BaseActivity<ActivityAdminViewRouteBinding>{
     private List<Route> routes = new ArrayList<>();
 
     @Override
-    public ActivityAdminViewRouteBinding getViewBinding() {
-        return ActivityAdminViewRouteBinding.inflate(getLayoutInflater());
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_route);
-
+        activityAdminViewRouteBinding = activityAdminViewRouteBinding.inflate(getLayoutInflater());
+        setContentView(activityAdminViewRouteBinding.getRoot());
+        nameActivityTitle("View Route");
         deleteBtn = findViewById(R.id.deleteBtn);
         floatingActionButton = findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -75,27 +72,27 @@ public class AdminViewRoute extends BaseActivity<ActivityAdminViewRouteBinding>{
 
         findAllRoute();
     }
-    private void findAllRoute()
-    {
+
+    private void findAllRoute() {
         RecyclerView recyclerView = findViewById(R.id.listOfRoute);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         routeManager.findAllRoutes().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(!queryDocumentSnapshots.isEmpty()){
-                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                            for(DocumentSnapshot doc:list){
-                                Route route = doc.toObject(Route.class);
-                                routes.add(route);
-                                ViewRouteAdapter adapter = new ViewRouteAdapter(routes);
-                                recyclerView.setAdapter(adapter);
-                                adapter.notifyItemInserted(routes.size() -1);
-                            }
-                        }else{
-                            Log.w("Message:","No data found in the database");
-                        }
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot doc : list) {
+                        Route route = doc.toObject(Route.class);
+                        routes.add(route);
+                        ViewRouteAdapter adapter = new ViewRouteAdapter(routes);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyItemInserted(routes.size() - 1);
                     }
-                });
+                } else {
+                    Log.w("Message:", "No data found in the database");
+                }
+            }
+        });
     }
 
     @Override
@@ -103,5 +100,10 @@ public class AdminViewRoute extends BaseActivity<ActivityAdminViewRouteBinding>{
         NavController navController = Navigation.findNavController(this, R.id.SecondFragment);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

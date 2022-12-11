@@ -1,5 +1,12 @@
 package com.tartantransporttracker;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,50 +16,47 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewbinding.ViewBinding;
+import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.tartantransporttracker.managers.UserManager;
 import com.tartantransporttracker.ui.route.AdminViewRoute;
 
-
 import java.util.Locale;
 
-public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    public abstract  T getViewBinding();
-    protected T binding;
+public class DrawerBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    DrawerLayout drawerLayout;
     private UserManager userManager = UserManager.getInstance();
-    private  DrawerLayout drawerLayout;
-    private NavigationView navigationView;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstance){
-        super.onCreate(savedInstance);
-        initBinding();
-//        drawerLayout = findViewById(R.id.drawLayout);
-//        navigationView = findViewById(R.id.navView);
-//        View hView = navigationView.getHeaderView(0);
+    public void setContentView(View view) {
+        drawerLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_drawer_base, null);
+        FrameLayout frameLayout = drawerLayout.findViewById(R.id.activityContainer);
+        frameLayout.addView(view);
+
+        super.setContentView(drawerLayout);
+
+        Toolbar toolbar = drawerLayout.findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar );
+
+        NavigationView navigationView = drawerLayout.findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.menu_drawer_open, R.string.menu_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
-    private void initBinding(){
-        binding = getViewBinding();
-        View view = binding.getRoot();
-        setContentView(view);
-    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.view_routes:
-                Intent intent = new Intent(this, AdminViewRoute.class);
+                Intent intent = new Intent(this, dashboard.class);
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 break;
-
+//
             case R.id.logout_button:
                 userManager.signOut(this).addOnSuccessListener(aVoid ->{
                     finish();
@@ -103,5 +107,10 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         String language = prefs.getString("My_Lang", "");
         setLocale(language);
+    }
+    protected void nameActivityTitle(String title){
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setTitle(title);
+        }
     }
 }
