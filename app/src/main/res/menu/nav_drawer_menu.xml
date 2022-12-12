@@ -3,7 +3,7 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/view_routes"
+            android:id="@+id/view_profile"
             android:title="@string/view_route"
             android:icon="@drawable/view_route_icon"/>
         <item

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,21 +16,7 @@
         android:theme="@style/Theme.TartanTransportTracker"
         tools:targetApi="31">
         <activity
-            android:name=".UpdateRouteActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.route.CreateBusStopActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.route.CreateRouteActivity"
+            android:name=".ProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -46,27 +35,11 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBgDYujDHJGK6mLneq-_86PtCYaNVBdJBA" />
+            android:value="AIzaSyB7MrShRSd347AqDzDU5NgRBB0L7qzBQ1I" />
 
         <activity
             android:name=".MapActivity"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.user.ViewUser"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.route.AdminViewRoute"
-            android:exported="true"
-            android:label="@string/title_activity_admin_view_route"
-            android:theme="@style/Theme.TartanTransportTracker.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.tartantransporttracker'
+    namespace 'com.tartantransporttracker.student'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.tartantransporttracker"
+        applicationId "com.tartantransporttracker.student"
         minSdk 29
         targetSdk 32
         versionCode 1
@@ -50,7 +50,14 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.1.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
+    implementation 'com.google.firebase:firebase-database:20.1.0'
+
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
     implementation 'com.google.firebase:firebase-messaging'
+
+    //Glide dependencies
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+
 }

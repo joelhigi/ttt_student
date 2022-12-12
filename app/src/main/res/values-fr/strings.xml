@@ -10,6 +10,7 @@
     <string name="invalid_password">Le mot de passe doit contenir plus de 5 caractères</string>
     <string name="login_failed">Échec de la connexion</string>
     <string name="login_succeded">Connexion réussie</string>
+    <string name="view_profile">Voir Profil</string>
     <string name="view_route">Voir l\'itinéraire</string>
     <string name="logout">" Se déconnecter"</string>
     <string name="button_login_text_logged">Voir la carte</string>

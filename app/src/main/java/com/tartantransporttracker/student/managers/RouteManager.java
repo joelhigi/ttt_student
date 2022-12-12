@@ -1,4 +1,8 @@
-package com.tartantransporttracker.managers;
+package com.tartantransporttracker.student.managers;
+/*
+* A class that manages the Route objects
+* by Didier
+* */
 
 import android.content.Context;
 import android.util.Log;
@@ -6,10 +10,10 @@ import android.util.Log;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.tartantransporttracker.models.Route;
-import com.tartantransporttracker.models.User;
-import com.tartantransporttracker.repository.RouteRepository;
-import com.tartantransporttracker.repository.UserRepository;
+import com.tartantransporttracker.student.models.Route;
+import com.tartantransporttracker.student.models.User;
+import com.tartantransporttracker.student.repository.RouteRepository;
+import com.tartantransporttracker.student.repository.UserRepository;
 
 import java.util.List;
 
@@ -54,3 +58,4 @@ public class RouteManager {
     }
 
 }
+

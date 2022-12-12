@@ -1,41 +1,219 @@
 {
   "project_info": {
-    "project_number": "465469493888",
-    "project_id": "tartantransport-c62d3",
-    "storage_bucket": "tartantransport-c62d3.appspot.com"
+    "project_number": "523393145001",
+    "firebase_url": "https://noble-radio-299516-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "noble-radio-299516",
+    "storage_bucket": "noble-radio-299516.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:465469493888:android:5d643fe614012610d70c65",
+        "mobilesdk_app_id": "1:523393145001:android:d904cc2c9109ed6d58b1b8",
         "android_client_info": {
-          "package_name": "com.tartantransporttracker"
+          "package_name": "com.specialoops.mylocationchecker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "465469493888-2qpholp9iejtrrtn00vs6rcoosm4mnt8.apps.googleusercontent.com",
+          "client_id": "523393145001-8uvkncglpg2j9kmhk04g3pr8mb32j4vk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.tartantransporttracker",
-            "certificate_hash": "994932b2c74a19e53710d18c4522ad1badcab1e0"
+            "package_name": "com.specialoops.mylocationchecker",
+            "certificate_hash": "3491b0da5e0bccce4e979de79632f54a7987ef3c"
           }
         },
         {
-          "client_id": "465469493888-3jlin3jr8ccq9p3e4n9vk02geh41q1cd.apps.googleusercontent.com",
+          "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDciBlMZKm8Q9XJnP0-PqIjsCNB6Uekw8I"
+          "current_key": "AIzaSyCb-D-mLWnbcf4nNdFdGyPonDFvmvzxY9Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "465469493888-3jlin3jr8ccq9p3e4n9vk02geh41q1cd.apps.googleusercontent.com",
+              "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523393145001:android:0d27053bca2f01ef58b1b8",
+        "android_client_info": {
+          "package_name": "com.specialoops.mylocationtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523393145001-f01k0bd7p3vo6tkrld9ung85vg00q9bo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.specialoops.mylocationtracker",
+            "certificate_hash": "3491b0da5e0bccce4e979de79632f54a7987ef3c"
+          }
+        },
+        {
+          "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb-D-mLWnbcf4nNdFdGyPonDFvmvzxY9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523393145001:android:e52a4b9239bc4d5e58b1b8",
+        "android_client_info": {
+          "package_name": "com.specialops.loctrackerjava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523393145001-83klh1m663jvi6k2pf04944u4ngs7lbd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.specialops.loctrackerjava",
+            "certificate_hash": "3491b0da5e0bccce4e979de79632f54a7987ef3c"
+          }
+        },
+        {
+          "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb-D-mLWnbcf4nNdFdGyPonDFvmvzxY9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523393145001:android:49cc4adb3d9ffcdf58b1b8",
+        "android_client_info": {
+          "package_name": "com.specialops.tttstudent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523393145001-8r0u7gjm0jtcc09okqh5sk4k9fpeve6h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.specialops.tttstudent",
+            "certificate_hash": "3491b0da5e0bccce4e979de79632f54a7987ef3c"
+          }
+        },
+        {
+          "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb-D-mLWnbcf4nNdFdGyPonDFvmvzxY9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523393145001:android:3a0ed2d3eb28e8aa58b1b8",
+        "android_client_info": {
+          "package_name": "com.tartantransporttracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb-D-mLWnbcf4nNdFdGyPonDFvmvzxY9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523393145001:android:72b3e94cd264a5d158b1b8",
+        "android_client_info": {
+          "package_name": "com.tartantransporttracker.student"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523393145001-knkft4b986fr6gk0d28mvr56oirdgctl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tartantransporttracker.student",
+            "certificate_hash": "3491b0da5e0bccce4e979de79632f54a7987ef3c"
+          }
+        },
+        {
+          "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb-D-mLWnbcf4nNdFdGyPonDFvmvzxY9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523393145001-99ese6dqeuq85d132482cfpd9nfqd6gi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

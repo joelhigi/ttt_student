@@ -1,5 +1,8 @@
-package com.tartantransporttracker.models;
-
+package com.tartantransporttracker.student.models;
+/*
+ * A class that acts as the model for all routes.
+ * by Didier
+ * */
 import com.google.firebase.firestore.DocumentId;
 
 import java.util.List;
