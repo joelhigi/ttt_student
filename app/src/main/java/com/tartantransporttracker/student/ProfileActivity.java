@@ -163,7 +163,7 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding> {
 //                selectedRoute.register(user);
 
 //                selectedRoute.notifyObservers(" =======>added new student");
-                routeManager.updateRoute(selectedRoute.getId(),selectedRoute);
+                routeManager.updateRoute(user.getUid(),selectedRoute);
             });
             showSnackBar("Preferred route updated successfully");
         });

@@ -1,7 +1,7 @@
 package com.tartantransporttracker.student.repository;
 /*
 * Class that functions as the repository for the routes
-* by Didier*/
+* by Didier & Joel*/
 
 import static android.content.ContentValues.TAG;
 
@@ -39,7 +39,8 @@ import java.util.List;
 public class RouteRepository {
 
     private static volatile RouteRepository instance;
-    private static  final String COLLECTION_NAME="routes";
+    private static final String ROUTES_COLLECTION="routes";
+    private static final String USER_COLLECTION="routes";
 
     public  RouteRepository(){}
 
@@ -60,8 +61,14 @@ public class RouteRepository {
 
     // get document reference
     private CollectionReference getRoutesCollection(){
-        return FirebaseFirestore.getInstance().collection(COLLECTION_NAME);
+        return FirebaseFirestore.getInstance().collection(ROUTES_COLLECTION);
     }
+
+    // get document reference for user
+    private CollectionReference getUserCollection(){
+        return FirebaseFirestore.getInstance().collection(USER_COLLECTION);
+    }
+
 
     // create route in Firestore
     public void createRoute(Route route){
@@ -109,6 +116,25 @@ public class RouteRepository {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG,"Route not updated");
+                    }
+                });
+    }
+
+    // Update favorite Route
+    public void updateUserRoute(String id,Route updatedRoute){
+        String route = updatedRoute.getName();
+        this.getUserCollection()
+                .document(id)
+                .set(route)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.w(TAG,"Favorite Route updated successfully");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG,"Favorite Route not updated");
                     }
                 });
     }
