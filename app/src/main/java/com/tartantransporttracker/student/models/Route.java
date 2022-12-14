@@ -4,10 +4,11 @@ package com.tartantransporttracker.student.models;
  * by Didier
  * */
 import com.google.firebase.firestore.DocumentId;
+import com.tartantransporttracker.student.notification.Subject;
 
 import java.util.List;
 
-public class Route {
+public class Route implements Subject {
     @DocumentId
     private String id;
     private String name;
@@ -49,5 +50,22 @@ public class Route {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public void register(User obj) {
+        students.add(obj);
+    }
+
+    @Override
+    public void unregister(User obj) {
+        students.remove(obj);
+    }
+
+    @Override
+    public void notifyObservers(String notification) {
+        for (User std : students) {
+            std.update(notification);
+        }
     }
 }

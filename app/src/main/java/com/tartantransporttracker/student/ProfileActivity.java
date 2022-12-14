@@ -128,12 +128,6 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding> {
             }
         });
 
-
-        // Mentor Checkbox
-        binding.isMentorCheckBox.setOnCheckedChangeListener((compoundButton, checked) -> {
-            userManager.updateRole("Driver");
-        });
-
         // Sign out button
         binding.signOutButton.setOnClickListener(view -> {
             userManager.signOut(this).addOnSuccessListener(aVoid -> {

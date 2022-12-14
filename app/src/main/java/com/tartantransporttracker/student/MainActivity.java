@@ -19,6 +19,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.tartantransporttracker.student.databinding.ActivityMainBinding;
 import com.tartantransporttracker.student.managers.UserManager;
 
@@ -45,6 +46,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+        firebaseMessaging.subscribeToTopic("bus_departure");
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         top = AnimationUtils.loadAnimation(this, R.anim.top_anim);
         bottom = AnimationUtils.loadAnimation(this, R.anim.bottom_anim);

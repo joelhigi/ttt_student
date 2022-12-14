@@ -87,13 +87,6 @@ android:gravity="center_horizontal">
 
         />
 
-    <!-- CHECKBOX IS USER MENTOR -->
-    <CheckBox
-        android:id="@+id/isMentorCheckBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="is Driver"/>
-
 
 
 </LinearLayout>

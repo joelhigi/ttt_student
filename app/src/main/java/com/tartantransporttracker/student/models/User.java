@@ -5,7 +5,9 @@ package com.tartantransporttracker.student.models;
  * */
 import androidx.annotation.Nullable;
 
-public class User {
+import com.tartantransporttracker.student.notification.Observer;
+
+public class User  implements Observer {
 
     private String uid;
     private String username;
@@ -74,5 +76,10 @@ public class User {
     public void setRoute(String newRoute)
     {
         route = newRoute;
+    }
+
+    @Override
+    public void update(String message) {
+        System.out.println(this.getUsername()+" "+message);
     }
 }
