@@ -13,12 +13,20 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.tartantransporttracker.student.databinding.ActivityMainBinding;
 import com.tartantransporttracker.student.managers.UserManager;
@@ -35,6 +43,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     private Animation top, bottom;
     private ImageView bus, logo;
 
+    private FirebaseFirestore tttFireStore;
+    private FirebaseUser tttUser;
+    private String uid,userRoute;
+
     @Override
     public ActivityMainBinding getViewBinding() {
         return ActivityMainBinding.inflate(getLayoutInflater());
@@ -47,7 +59,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
-        firebaseMessaging.subscribeToTopic("bus_departure");
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         top = AnimationUtils.loadAnimation(this, R.anim.top_anim);
         bottom = AnimationUtils.loadAnimation(this, R.anim.bottom_anim);
@@ -57,6 +69,29 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         bus.setAnimation(top);
         logo.setAnimation(bottom);
         welcome.setAnimation(bottom);
+
+        tttUser = FirebaseAuth.getInstance().getCurrentUser();
+        tttFireStore = FirebaseFirestore.getInstance();
+        uid = tttUser.getUid();
+
+        //Get user route for notification
+        DocumentReference docRef = tttFireStore.collection("users").document(uid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        userRoute = document.get("route").toString();
+                        firebaseMessaging.subscribeToTopic(userRoute.replaceAll(" ","_"));
+                    } else {
+                        Log.d("Failed", "No such document");
+                    }
+                } else {
+                    Log.d("Failed 2", "get failed with ", task.getException());
+                }
+            }
+        });
 
         new Handler().postDelayed(new Runnable() {
             @Override

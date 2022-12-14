@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.tartantransporttracker.student.StudentMapFragment;
 import com.tartantransporttracker.student.databinding.ActivityMapBinding;
 import com.tartantransporttracker.student.managers.UserManager;
@@ -55,6 +56,8 @@ public class MapActivity extends DrawerBaseActivity {
         setContentView(activityMapBinding.getRoot());
         nameActivityTitle(getString(R.string.student_map));
 
+        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+
         //Acquiring user id
         tttUser = FirebaseAuth.getInstance().getCurrentUser();
         uid = tttUser.getUid();
@@ -75,6 +78,8 @@ public class MapActivity extends DrawerBaseActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             userRoute = document.get("route").toString();
+                            String rout = userRoute.replaceAll(" ", "_");
+                            firebaseMessaging.subscribeToTopic(rout);
                             //Acquiring Locations
                             tttRealTime = FirebaseDatabase.getInstance("https://noble-radio-299516-default-rtdb.europe-west1.firebasedatabase.app/");
                             refAddress = "journeys/routes/"+userRoute;
