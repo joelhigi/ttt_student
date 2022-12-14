@@ -55,7 +55,7 @@ public class StudentMapFragment extends Fragment {
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(entry.getValue(), 17));
             }
             googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("CMU Africa Campus"));
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 15));
+            //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude), 15));
 
         }
     };
