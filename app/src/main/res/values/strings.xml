@@ -10,6 +10,7 @@
     <string name="no_driver">No driver active on </string>
     <string name="student_map">Bus-tracking Map</string>
     <string name="view_route">View route</string>
+    <string name="profile">Profile</string>
     <string name="login_failed">Login failed</string>
     <string name="logout">Logout</string>
     <string name="change_language">Language</string>

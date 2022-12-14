@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TartanTransportTracker</string>
-    <string name="prompt_email" translatable="false">email</string>
-    <string name="prompt_password" translatable="false">le mot de passe</string>
-    <string name="action_sign_in">Connexion ou Inscription</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Mot de Passe</string>
+    <string name="action_sign_in">Connexion / Inscription</string>
     <string name="action_sign_in_short">Connexion</string>
     <string name="welcome">Bienvenue</string>
+    <string name="profile">Profil</string>
     <string name="student_map">Carte de suivi des bus</string>
     <string name="no_driver">Aucun chauffeur actif sur </string>
     <string name="invalid_username">Nom d\'utilisateur non valide</string>
