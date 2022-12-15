@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/view_profile"
-            android:title="@string/view_route"
+            android:title="@string/view_profile"
             android:icon="@drawable/view_route_icon"/>
         <item
             android:id="@+id/language_btn"
